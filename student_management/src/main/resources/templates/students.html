@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="pos-f-t">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand">Student Management</a>
+    <a class="nav-link mr-auto" th:href ="@{/students/new}">Add Student</a>
+    <!-- <a class="nav-link " th:href ="@{/students/search}">Search student</a>  -->
+   <!-- <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="@{students}">Student Management<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Add Student</a>
+      </li>
+   
+    </ul> -->
+ <form class="form-inline my-2 my-lg-0" method="get" action="/students/search/search_students">
+      <input id="searchInput" name="searchInput" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button  class="btn btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+    </form> 
+  </div>  
+</nav>
+</div>
+<br>
+	<div class = "container">
+		<div style="text-align:center">
+	  	<h3>Student List</h3>
+	  </div>
+	  <br>
+		<!-- <div class="row">
+			<div class = "col-lg-3">
+				<a th:href = "@{/students/new}" class="btn btn-primary bnt-sm mb-3">Add Student</a>
+			</div>
+		</div> -->
+		<table class="table table-striped table-bordered">
+				<thead class="table-dark">
+					<tr>
+						<th> Student First Name</th>
+						<th> Student Last Name</th>
+						<th> Student Email</th>
+						<th> Actions </th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each = "student: ${students}">
+						<td th:text = "${student.firstname}"></td>
+						<td th:text = "${student.lastname}"></td>
+						<td th:text = "${student.email}"></td>
+						<td> 
+							<a th:href = "@{students/edit/{id}(id = ${student.id})}"
+							class = "btn btn-primary">Update</a>
+							<a th:href = "@{students/delete/{id}(id = ${student.id})}"
+							class = "btn btn-danger">Delete</a>
+						</td>
+						
+					</tr>
+				</tbody>
+			</table>
+	</div>
+</body>
+</html>
